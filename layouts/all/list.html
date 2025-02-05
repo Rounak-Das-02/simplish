@@ -1,0 +1,141 @@
+{{ define "main" }}
+
+<div class="p-8 mx-auto px-6 sm:px-8 md:px-56 py-12">
+	<h2
+		class="text-2xl font-semibold text-left mb-8 font-[Merriweather] underline underline-offset-8 decoration-gray-300 border-b-2 border-gray-100">
+		{{ .Title }}
+	</h2>
+
+	<div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+		{{ $pages := where .Site.RegularPages "Params.main_page" "ne" "hide" }} {{
+		$paginator := .Paginate $pages.ByTitle }} {{ range $paginator.Pages }}
+		<div
+			class="bg-white shadow-sm rounded-sm hover:shadow-md transition duration-100 border border-gray-100">
+			<a href="{{ .Permalink }}">
+				<img
+					src="{{ .Params.cover }}"
+					alt="{{ .Title }}"
+					class="w-full h-40 object-cover" />
+				<div class="p-6">
+					<h3 class="text-xl font-semibold text-gray-800">
+						{{ .Title | truncate 60 "..." }}
+					</h3>
+					<div class="text-gray-600 mt-2 h-16">
+						{{ .Summary | truncate 80 "..." }}
+					</div>
+					<div class="text-gray-500 text-sm mt-4">
+						{{ .Date.Format "Jan 2, 2006" }} · {{ .ReadingTime }} min read
+					</div>
+				</div>
+			</a>
+		</div>
+		{{ end }}
+	</div>
+
+	<!-- Pagination (optional if you want pagination) -->
+	<div class="flex justify-center items-center mt-8">
+		<ul class="flex items-center space-x-3">
+			<!-- First button -->
+			{{ if .Paginator.HasPrev }}
+			<li class="previous">
+				<a
+					href="{{ .Paginator.First.URL }}"
+					aria-label="First"
+					class="px-4 py-2 text-gray-700 hover:text-gray-900">
+					First
+				</a>
+			</li>
+			{{ else }}
+			<li class="previous text-gray-400 cursor-not-allowed">
+				<span>First</span>
+			</li>
+			{{ end }}
+
+			<!-- Previous button -->
+			{{ if .Paginator.HasPrev }}
+			<li>
+				<a
+					href="{{ .Paginator.Prev.URL }}"
+					title="Previous"
+					aria-label="Previous"
+					class="px-4 py-2 text-gray-700 hover:text-gray-900">
+					<i class="fa fa-angle-double-left"></i>
+				</a>
+			</li>
+			{{ else }}
+			<li class="text-gray-400 cursor-not-allowed">
+				<span><i class="fa fa-angle-double-left"></i></span>
+			</li>
+			{{ end }}
+
+			<!-- Page Numbers -->
+			{{ $currentPage := .Paginator.PageNumber }} {{ $totalPages :=
+			.Paginator.TotalPages }} {{ if le $totalPages 5 }}
+			<!-- If total pages are 5 or less, show all pages -->
+			{{ range $pager := .Paginator.Pagers }}
+			<li>
+				<a
+					href="{{ $pager.URL }}"
+					class="px-4 py-2 text-gray-700 hover:text-gray-900
+						{{ if eq $pager.PageNumber $currentPage }} bg-zinc-500 text-white rounded-md {{ else }} rounded-md {{ end }}">
+					{{ $pager.PageNumber }}
+				</a>
+			</li>
+			{{ end }} {{ else }}
+			<!-- If total pages are more than 5, show first few and last few pages with ellipses -->
+			{{ range $index, $pager := .Paginator.Pagers }} {{ if or (le $index 2) (eq
+			$pager.PageNumber $currentPage) (ge $index (sub $totalPages 3)) }}
+			<li>
+				<a
+					href="{{ $pager.URL }}"
+					class="px-4 py-2 text-gray-700 hover:text-gray-900
+						{{ if eq $pager.PageNumber $currentPage }} bg-zinc-500 text-white rounded-md {{ else }}  rounded-md {{ end }}">
+					{{ $pager.PageNumber }}
+				</a>
+			</li>
+			{{ else if eq $index 3 }}
+			<li>
+				<span class="px-4 py-2 text-gray-400">...</span>
+			</li>
+			{{ else if eq $index (sub $totalPages 4) }}
+			<li>
+				<span class="px-4 py-2 text-gray-400">...</span>
+			</li>
+			{{ end }} {{ end }} {{ end }}
+
+			<!-- Next button -->
+			{{ if .Paginator.HasNext }}
+			<li>
+				<a
+					href="{{ .Paginator.Next.URL }}"
+					title="Next"
+					aria-label="Next"
+					class="px-4 py-2 text-gray-700 hover:text-gray-900">
+					<i class="fa fa-angle-double-right"></i>
+				</a>
+			</li>
+			{{ else }}
+			<li class="text-gray-400 cursor-not-allowed">
+				<span><i class="fa fa-angle-double-right"></i></span>
+			</li>
+			{{ end }}
+
+			<!-- Last button -->
+			{{ if .Paginator.HasNext }}
+			<li class="next">
+				<a
+					href="{{ .Paginator.Last.URL }}"
+					aria-label="Last"
+					class="px-4 py-2 text-gray-700 hover:text-gray-900">
+					Last
+				</a>
+			</li>
+			{{ else }}
+			<li class="next text-gray-400 cursor-not-allowed">
+				<span>Last</span>
+			</li>
+			{{ end }}
+		</ul>
+	</div>
+</div>
+{{ end }}
