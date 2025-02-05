@@ -1,7 +1,7 @@
 {
 	"scripts": {
-		"build:css": "npx tailwindcss -i ./assets/css/tailwind.css -o ./static/css/style.css --minify",
-		"dev:css": "npx tailwindcss -i ./assets/css/tailwind.css -o ./static/css/style.css --watch",
+		"build:css": "npx tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/index.css --minify",
+		"dev:css": "npx tailwindcss -i ./assets/css/tailwind.css -o ./assets/css/index.css --watch",
 		"dev": "concurrently \"hugo server\" \"npm run dev:css\""
 	},
 	"devDependencies": {
