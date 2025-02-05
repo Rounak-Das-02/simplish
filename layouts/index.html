@@ -1,7 +1,8 @@
 {{ define "main" }}
 <!-- Hero Section -->
 <section
-	class="relative bg-[url('/images/relax_beach.jpeg')] bg-cover bg-center py-32 sm:mx-8 md:mx-56">
+class="relative bg-cover bg-center py-32 sm:mx-8 md:mx-56"
+style="background-image: url('{{ "images/relax_beach.jpeg" | relURL }}');">
 	<div class="absolute inset-0 bg-black opacity-50"></div>
 	<div class="container mx-auto text-center relative z-10">
 		<h1 class="text-5xl font-bold text-white leading-tight mb-4 font-[Inter]">
