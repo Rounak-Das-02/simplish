@@ -10,9 +10,10 @@ style="background-image: url('{{ "images/relax_beach.jpeg" | relURL }}');">
 		</h1>
 		<p class="text-xl text-white mb-8">
 			A laid back way of writing about tech, life, and more. <br />
-			You don't have anything to do, so you read.
+			You don't have anything to do, so you read. <br/> <br/>
+			<i><u>Yes, the search bar doesn't work yet.</i></u>
 		</p>
-		<a href="/all/"
+		<a href="{{ .Site.BaseURL }}/all/"
 			class="bg-white text-zinc-500 hover:bg-zinc-100 px-6 py-3 font-semibold rounded-full transition duration-300">
 			Start Reading
 		</a>
@@ -84,7 +85,7 @@ style="background-image: url('{{ "images/relax_beach.jpeg" | relURL }}');">
 		</div>
 
 		<div class="text-center mt-8">
-			<a href="/all"
+			<a href="{{ .Site.BaseURL }}/all"
 				class="bg-white text-zinc-500 hover:bg-gray-100 px-6 py-3 font-semibold rounded-full transition duration-300">Show
 				all Stories</a>
 		</div>
