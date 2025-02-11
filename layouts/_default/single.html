@@ -13,13 +13,13 @@
 		<!-- Cover Image Section -->
 		{{ if .Params.cover }}
 		<div class="mt-8">
-			<img src="{{ .Params.cover }}" alt="{{ .Title }}"
+			<img src="{{ .Params.cover | relURL }}" alt="{{ .Title }}"
 				class="w-full aspect-[16/9] object-cover rounded-sm shadow-md" />
 		</div>
 		{{ end }}
 
 		<!-- Content Section -->
-		<div class="mt-8 prose prose-lg text-zinc-800 leading-relaxed font-['Merriweather'] text-lg md:px-4">
+		<div class="mt-8 prose prose-lg text-gray-600 leading-[1.75] font-['Merriweather'] text-lg md:px-4">
 			{{ .Content }}
 		</div>
 
@@ -27,7 +27,7 @@
 		<!-- Footer Section of Article -->
 		<div class="mt-12">
 			{{ range .Params.tags }}
-			<a href="{{ " /tags/" | relURL }}{{ . | urlize }}"
+			<a href="{{ "{{ .Site.BaseURL }}/tags/" | relURL }}{{ . | urlize }}"
 				class="px-2 ml-2 py-2 text-base text-zinc-500 bg-zinc-100 rounded-sm hover:bg-zinc-200">
 				{{ . }}
 			</a>
