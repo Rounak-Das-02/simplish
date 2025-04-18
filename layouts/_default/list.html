@@ -11,7 +11,7 @@
 			class="bg-white shadow-sm rounded-sm hover:shadow-md transition duration-100 border border-gray-100">
 			<a href="{{ .Permalink }}">
 				<img
-					src="{{ .Params.cover }}"
+					src="{{ .Site.BaseURL }}{{ .Params.cover }}"
 					alt="{{ .Title }}"
 					class="w-full h-40 object-cover" />
 				<div class="p-6">
